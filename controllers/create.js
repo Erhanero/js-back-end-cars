@@ -6,6 +6,7 @@ const get = (req, res) => {
 
 const post = (req, res) => {
     const { name, description, imageUrl, price } = req.body;
+    console.log(name, description, imageUrl, price)
     carsServices.create(name, description, imageUrl, price);
     res.redirect("/")
 
