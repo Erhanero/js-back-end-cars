@@ -1,9 +1,8 @@
 const carsServices = require("../services/carsServices");
 
-const homeController = (req, res) => {
+const homeController = async (req, res) => {
 
-    const cars = carsServices.getAll(req.query);
-
+    const cars = await carsServices.getAll(req.query);
 
     res.render("index", { cars, query: req.query });
 }

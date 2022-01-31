@@ -1,10 +1,22 @@
 const carsServices = require("../services/carsServices")
 
-const detailsController = (req, res) => {
+const detailsController = async (req, res) => {
     const id = req.params.id;
-    const car = carsServices.getById(id);
-    console.log(car.name);
+    const car = await carsServices.getById(id);
     res.render("details", { car });
 }
 
-module.exports = detailsController;
+const deleteController = async (req, res) => {
+    try {
+        await carsServices.deleteById(req.params.id);
+        res.redirect(`/`);
+
+    } catch (err) {
+        res.redirect("/404");
+    }
+}
+
+module.exports = {
+    detailsController,
+    deleteController
+}
