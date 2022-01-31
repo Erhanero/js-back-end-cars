@@ -6,22 +6,29 @@ const detailsController = require("./controllers/details");
 const homeController = require("./controllers/home");
 const notFoundController = require("./controllers/notFound");
 
-const app = express();
+const initDb = require("./models/database")
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("static"));
+start();
+async function start() {
 
-app.engine("hbs", hbs.create({
-    extname: ".hbs"
-}).engine);
-app.set("view engine", "hbs");
+    await initDb();
+    const app = express();
 
-app.get("/", homeController);
-app.get("/create", createController.get);
-app.post("/create", createController.post);
-app.get("/about", aboutController);
-app.get("/details/:id", detailsController);
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.static("static"));
 
-app.all("*", notFoundController);
+    app.engine("hbs", hbs.create({
+        extname: ".hbs"
+    }).engine);
+    app.set("view engine", "hbs");
 
-app.listen(5000, () => console.log("Server is running on port 5000..."));
+    app.get("/", homeController);
+    app.get("/create", createController.get);
+    app.post("/create", createController.post);
+    app.get("/about", aboutController);
+    app.get("/details/:id", detailsController);
+
+    app.all("*", notFoundController);
+
+    app.listen(5000, () => console.log("Server is running on port 5000..."));
+}
