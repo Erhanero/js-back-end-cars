@@ -5,8 +5,9 @@ const createController = require("./controllers/create");
 const { detailsController, deleteController } = require("./controllers/details");
 const homeController = require("./controllers/home");
 const notFoundController = require("./controllers/notFound");
+const editController = require("./controllers/edit");
 
-const initDb = require("./models/database")
+const initDb = require("./models/database");
 
 start();
 
@@ -28,7 +29,9 @@ async function start() {
     app.post("/create", createController.post);
     app.get("/about", aboutController);
     app.get("/details/:id", detailsController);
-    app.get('/delete/:id', deleteController)
+    app.get('/delete/:id', deleteController);
+    app.get("/edit/:id", editController.get);
+    app.post("/edit/:id", editController.post);
 
     app.all("*", notFoundController);
 

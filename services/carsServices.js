@@ -22,17 +22,7 @@ const getAll = async (query) => {
 
     return cars;
 
-    // let cars = carsData.slice();
-    // if (query.search) {
-    //     cars = cars.filter(x => x.name.toLowerCase().includes(query.search.toLowerCase()));
-    // }
-    // if (query.from) {
-    //     cars = cars.filter(x => Number(x.price) >= Number(query.from));
-    // }
-    // if (query.to) {
-    //     cars = cars.filter(x => Number(x.price) <= Number(query.to))
-    // }
-    // return cars;
+
 }
 
 const create = async (name, description, imageUrl, price) => {
@@ -51,16 +41,13 @@ const deleteById = async (id) => {
     await Car.findByIdAndDelete(id);
 }
 
-const search = (query) => {
-    let cars = getAll();
-
-    return cars;
+const editById = async (id, car) => {
+    await Car.findByIdAndUpdate(id, car)
 }
-
 module.exports = {
     getAll,
     create,
     getById,
-    search,
-    deleteById
+    deleteById,
+    editById
 }
