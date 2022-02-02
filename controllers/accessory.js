@@ -4,10 +4,13 @@ const get = (req, res) => {
     res.render("createAccessory");
 }
 
-const post = (req, res) => {
-
+const post = async (req, res) => {
+    const accessory = req.body;
+    await accessoryServices.createAccessory(accessory);
+    res.redirect("/");
 }
 
 module.exports = {
-    get
+    get,
+    post
 }

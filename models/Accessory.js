@@ -8,7 +8,7 @@ const accessorySchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        maxlength: 100,
+        maxlength: 300,
     },
     imageUrl: {
         type: String,
