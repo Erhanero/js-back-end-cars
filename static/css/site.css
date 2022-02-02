@@ -11,14 +11,16 @@ header ul {
 }
 
 img {
-    height: 200px;
-    width: auto;
+    max-height: 250px;
+    max-width:250px;
 }
 
 img.cube {
     display: block;
     margin: 0 auto;
     text-align: center;
+    
+
 }
 
 img.logo {
