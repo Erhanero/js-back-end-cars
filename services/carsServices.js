@@ -25,6 +25,12 @@ const getAll = async (query) => {
 
 }
 
+const attachAccessory = async (carId, accessoryId) => {
+    const car = await Car.findById(carId);
+    car.accessories.push(accessoryId);
+    car.save();
+}
+
 const create = async (name, description, imageUrl, price) => {
     let car = new Car({ name, description, imageUrl, price });
     await car.save();
@@ -32,7 +38,7 @@ const create = async (name, description, imageUrl, price) => {
 }
 
 const getById = async (id) => {
-    let car = await Car.findById(id).lean();
+    let car = await Car.findById(id).populate("accessories").lean();
     return car;
 
 }
@@ -49,5 +55,6 @@ module.exports = {
     create,
     getById,
     deleteById,
-    editById
+    editById,
+    attachAccessory
 }

@@ -24,6 +24,10 @@ const carSchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
+    accessories: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Accessory"
+    }]
 });
 
 const Car = mongoose.model("Car", carSchema);

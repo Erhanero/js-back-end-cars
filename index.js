@@ -7,6 +7,7 @@ const homeController = require("./controllers/home");
 const notFoundController = require("./controllers/notFound");
 const editController = require("./controllers/edit");
 const accessoryController = require("./controllers/accessory");
+const atachController = require("./controllers/atach");
 
 const initDb = require("./models/database");
 
@@ -34,7 +35,9 @@ async function start() {
     app.get("/edit/:id", editController.get);
     app.post("/edit/:id", editController.post);
     app.get("/create/accessory", accessoryController.get);
-    app.post("/create/accessory", accessoryController.post)
+    app.post("/create/accessory", accessoryController.post);
+    app.get("/atach/:id", atachController.get);
+    app.post("/atach/:id", atachController.post)
 
     app.all("*", notFoundController);
 
