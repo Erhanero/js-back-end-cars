@@ -22,7 +22,6 @@ const registerGet = (req, res) => {
 }
 
 const registerPost = async (req, res) => {
-    console.log(req.body)
     if (req.body.username == "" || req.body.password == "") {
         return res.redirect("/register")
     }
