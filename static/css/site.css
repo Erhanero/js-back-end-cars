@@ -11,16 +11,14 @@ header ul {
 }
 
 img {
-    max-height: 250px;
-    max-width:250px;
+    height: 200px;
+    width: auto;
 }
 
 img.cube {
     display: block;
     margin: 0 auto;
     text-align: center;
-    
-
 }
 
 img.logo {
@@ -107,10 +105,18 @@ button, main a.btn {
     color: white;
 }
 
+.details a.btn{
+    width: 28%;
+}
+
 button:hover {
     background-color: #0B2133;
     color: white;
     cursor: pointer;
+}
+
+a.btn:hover{
+    text-decoration: underline;
 }
 
 a {
@@ -159,6 +165,7 @@ form label {
 
 input[type=text],
 input[type=number],
+input[type=password],
 select,
 textarea {
     width: 100%;
@@ -254,7 +261,6 @@ footer {
 
 /*Animations & Transitions
 */
-
 
 @-webkit-keyframes fadeOut {
     from {

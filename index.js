@@ -8,6 +8,7 @@ const notFoundController = require("./controllers/notFound");
 const editController = require("./controllers/edit");
 const accessoryController = require("./controllers/accessory");
 const atachController = require("./controllers/atach");
+const { loginGet, loginPost, registerGet, registerPost, logout } = require("./controllers/auth");
 
 const initDb = require("./models/database");
 
@@ -37,7 +38,17 @@ async function start() {
     app.get("/create/accessory", accessoryController.get);
     app.post("/create/accessory", accessoryController.post);
     app.get("/atach/:id", atachController.get);
-    app.post("/atach/:id", atachController.post)
+    app.post("/atach/:id", atachController.post);
+    app.get("/logout", logout);
+
+    app.route("/login")
+        .get(loginGet)
+        .post(loginPost);
+
+    app.route("/register")
+        .get(registerGet)
+        .post(registerPost);
+
 
     app.all("*", notFoundController);
 
