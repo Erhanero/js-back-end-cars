@@ -9,8 +9,9 @@ const editController = require("./controllers/edit");
 const accessoryController = require("./controllers/accessory");
 const atachController = require("./controllers/atach");
 const { loginGet, loginPost, registerGet, registerPost, logout } = require("./controllers/auth");
-
+const authService = require("./services/auth");
 const initDb = require("./models/database");
+const session = require("express-session");
 
 start();
 
@@ -19,8 +20,15 @@ async function start() {
     await initDb();
     const app = express();
 
+    app.use(session({
+        secret: "my secret",
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: "auto" }
+    }));
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static("static"));
+    app.use(authService());
 
     app.engine("hbs", hbs.create({
         extname: ".hbs"
