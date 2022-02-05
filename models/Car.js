@@ -5,11 +5,13 @@ const carSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
     description: {
         type: String,
         required: true,
         maxlength: 100,
     },
+
     imageUrl: {
         type: String,
         required: true,
@@ -20,14 +22,18 @@ const carSchema = new mongoose.Schema({
             message: "Image Url is invalid!"
         },
     },
+
     price: {
         type: Number,
         require: true,
     },
+
     accessories: [{
         type: mongoose.Types.ObjectId,
         ref: "Accessory"
-    }]
+    }],
+
+    owner: { type: mongoose.Types.ObjectId, ref: "User" }
 });
 
 const Car = mongoose.model("Car", carSchema);

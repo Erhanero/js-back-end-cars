@@ -31,9 +31,8 @@ const attachAccessory = async (carId, accessoryId) => {
     car.save();
 }
 
-const create = async (name, description, imageUrl, price) => {
-    let car = new Car({ name, description, imageUrl, price });
-    await car.save();
+const create = async (car) => {
+    await Car.create(car)
 
 }
 
