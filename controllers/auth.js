@@ -1,6 +1,7 @@
 
 const logout = (req, res) => {
-
+    req.auth.logout();
+    res.redirect("/")
 }
 
 const loginGet = (req, res) => {

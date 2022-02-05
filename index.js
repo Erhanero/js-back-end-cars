@@ -12,6 +12,7 @@ const { loginGet, loginPost, registerGet, registerPost, logout } = require("./co
 const authService = require("./services/auth");
 const initDb = require("./models/database");
 const session = require("express-session");
+const { isLoggedIn } = require("./services/util")
 
 start();
 
@@ -36,18 +37,18 @@ async function start() {
     app.set("view engine", "hbs");
 
     app.get("/", homeController);
-    app.get("/create", createController.get);
-    app.post("/create", createController.post);
+    app.get("/create", isLoggedIn(), createController.get);
+    app.post("/create", isLoggedIn(), createController.post);
     app.get("/about", aboutController);
     app.get("/details/:id", detailsController);
     app.get('/delete/:id', deleteController);
-    app.get("/edit/:id", editController.get);
-    app.post("/edit/:id", editController.post);
-    app.get("/create/accessory", accessoryController.get);
-    app.post("/create/accessory", accessoryController.post);
-    app.get("/atach/:id", atachController.get);
-    app.post("/atach/:id", atachController.post);
-    app.get("/logout", logout);
+    app.get("/edit/:id", isLoggedIn(), editController.get);
+    app.post("/edit/:id", isLoggedIn(), editController.post);
+    app.get("/create/accessory", isLoggedIn(), accessoryController.get);
+    app.post("/create/accessory", isLoggedIn(), accessoryController.post);
+    app.get("/atach/:id", isLoggedIn(), atachController.get);
+    app.post("/atach/:id", isLoggedIn(), atachController.post);
+    app.get("/logout", isLoggedIn(), logout);
 
     app.route("/login")
         .get(loginGet)
