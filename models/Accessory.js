@@ -24,6 +24,9 @@ const accessorySchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
+
+    owner: { type: mongoose.Types.ObjectId, ref: "User" }
+
 });
 
 const Accessory = mongoose.model("Accessory", accessorySchema);

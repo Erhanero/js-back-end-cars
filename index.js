@@ -27,6 +27,7 @@ async function start() {
         saveUninitialized: true,
         cookie: { secure: "auto" }
     }));
+
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static("static"));
     app.use(authService());
