@@ -4,7 +4,7 @@ const get = (req, res) => {
     res.render("create");
 }
 
-const post = (req, res) => {
+const post = async (req, res) => {
     const car = {
         name: req.body.name,
         description: req.body.description,
@@ -12,7 +12,7 @@ const post = (req, res) => {
         price: req.body.price,
         owner: req.session.user.id
     }
-    carsServices.create(car);
+    await carsServices.create(car);
     res.redirect("/");
 
 }
