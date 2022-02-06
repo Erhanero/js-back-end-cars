@@ -3,7 +3,11 @@ const carsServices = require("../services/carsServices")
 const detailsController = async (req, res) => {
     const id = req.params.id;
     const car = await carsServices.getById(id);
-    console.log(car)
+
+    if (req.session.user.id && req.session.user.id == car.owner) {
+        res.locals.isOwner = true;
+    }
+
     res.render("details", { car });
 }
 

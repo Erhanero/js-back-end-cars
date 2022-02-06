@@ -5,9 +5,11 @@
         <p><span>Description:</span> {{car.description}}</p>
         <p><span>Price</span> {{car.price}}</p>
         <a class="btn" href="/">Back</a>
+        {{#if isOwner}}
         <a class="btn" href="/edit/{{car._id}}">Edit</a>
         <a class="btn" href="/delete/{{car._id}}">Delete</a>
         <a class="btn" href="/atach/{{car._id}}">Atach accessory</a>
+        {{/if}}
     </div>
     <h2>Accessories</h2>
     <div class="accessories">
