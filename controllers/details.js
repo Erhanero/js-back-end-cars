@@ -9,8 +9,13 @@ const detailsController = async (req, res) => {
 
 const deleteController = async (req, res) => {
     try {
-        await carsServices.deleteById(req.params.id);
-        res.redirect(`/`);
+
+        if (await carsServices.deleteById(req.params.id, req.session.user.id)) {
+            res.redirect(`/`);
+
+        } else {
+            res.redirect("/login")
+        }
 
     } catch (err) {
         res.redirect("/404");

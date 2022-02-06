@@ -25,8 +25,11 @@ const getAll = async (query) => {
 
 }
 
-const attachAccessory = async (carId, accessoryId) => {
+const attachAccessory = async (carId, accessoryId, ownerId) => {
     const car = await Car.findById(carId);
+    if (car.owner != ownerId) {
+        return false;
+    }
     car.accessories.push(accessoryId);
     car.save();
 }
@@ -42,12 +45,27 @@ const getById = async (id) => {
 
 }
 
-const deleteById = async (id) => {
+const deleteById = async (id, ownerId) => {
+    const car = await Car.findById(id);
+    if (car.owner != ownerId) {
+        return false;
+    }
+
     await Car.findByIdAndDelete(id);
+    return true;
 }
 
-const editById = async (id, car) => {
-    await Car.findByIdAndUpdate(id, car)
+
+const editById = async (id, car, ownerId) => {
+    const currentCar = await getById(id);
+
+    if (currentCar.owner != ownerId) {
+        return false;
+    }
+
+    await Car.findByIdAndUpdate(id, car);
+    return true;
+
 }
 module.exports = {
     getAll,

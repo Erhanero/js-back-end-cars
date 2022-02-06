@@ -16,10 +16,13 @@ const get = async (req, res) => {
 const post = async (req, res) => {
     const carId = req.params.id;
     const accessoryId = req.body.accessory;
-    console.log(carId, accessoryId)
     try {
-        await carsServices.attachAccessory(carId, accessoryId);
-        res.redirect(`/details/${carId}`);
+        if (await carsServices.attachAccessory(carId, accessoryId, req.session.user.id)) {
+            res.redirect(`/details/${carId}`);
+
+        } else {
+            res.redirect("/login");
+        }
 
     } catch (err) {
         res.redirect("404")
