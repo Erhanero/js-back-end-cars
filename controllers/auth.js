@@ -40,9 +40,9 @@ const registerPost = async (req, res) => {
         }
         await req.auth.register(req.body.username, req.body.password);
         res.redirect("/");
-    } catch (err) {
-        console.log(err)
-        res.redirect("/register")
+    } catch (errors) {
+        console.log(errors)
+        res.render("registerPage", { errors, data: { username: req.body.username } })
     }
 }
 

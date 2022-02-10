@@ -12,8 +12,16 @@ const post = async (req, res) => {
         price: req.body.price,
         owner: req.session.user.id
     }
-    await carsServices.create(car);
-    res.redirect("/");
+    try {
+        await carsServices.create(car);
+        res.redirect("/");
+
+    } catch (errors) {
+        errors = Object.values(errors.errors).map(e => ({ msg: e.properties.message }))
+        console.log(errors);
+        res.render("create", { errors });
+    }
+
 
 }
 module.exports = {

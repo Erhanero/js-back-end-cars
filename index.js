@@ -57,11 +57,15 @@ async function start() {
 
     app.route("/register")
         .get(registerGet)
-        .post(body("username").isLength({ min: 3 }).withMessage("Username must be at least 3 characters long").bail()
-            .isAlphanumeric().withMessage("Username may contain only letters and numbers"),
+        .post(body("username").trim(),
+            body("username")
+                .isLength({ min: 3 }).withMessage("Username must be at least 3 characters long").bail()
+                .isAlphanumeric().withMessage("Username may contain only letters and numbers"),
+            body("password").trim(),
             body("password")
                 .notEmpty().withMessage("Password is required")
                 .isLength({ min: 8 }).withMessage("Password must be at least 8 caracters long"),
+            body("repeatPassword").trim(),
             body("repeatPassword")
                 .custom((value, { req }) => {
                     if (value != req.body.password) {
